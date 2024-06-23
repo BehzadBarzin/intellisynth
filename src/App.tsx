@@ -1,4 +1,5 @@
 import ButtonGradient from "./assets/svg/ButtonGradient.jsx";
+import Collaboration from "./components/Collaboration.js";
 import Features from "./components/Features.js";
 import Header from "./components/Header";
 import Hero from "./components/Hero.js";
@@ -10,6 +11,7 @@ function App() {
         <Header />
         <Hero />
         <Features />
+        <Collaboration />
       </div>
 
       {/* Button Gradient defines the svg gradient used in buttons and must me simply included here */}
