@@ -1,16 +1,35 @@
 import { curve, heroBackground, robot } from "../assets";
 import Button from "./Button";
 import Section from "./Section";
+import { BackgroundCircles, BottomLine, Gradient } from "./design/Hero";
+import { heroIcons } from "../constants";
+import { ScrollParallax } from "react-just-parallax";
+import { useRef } from "react";
+
+import { loading } from "../assets";
+
+import { notification1 } from "../assets";
+import { notificationImages } from "../constants";
+
+import { companyLogos } from "../constants";
 
 const Hero = () => {
+  // ---------------------------------------------------------------------------
+  // Refs
+  const heroRef = useRef<HTMLDivElement>();
+  // ---------------------------------------------------------------------------
   return (
     <Section
-      className="pt-[12rem] -mt-[5.25rem]"
+      className="-mt-[5.25rem]"
       crosses
+      customPaddings="pt-[12rem]"
       crossesOffset="lg:translate-y-[5.25rem]"
       id="hero"
     >
-      <div className="container relative">
+      <div
+        className="container relative"
+        ref={(el) => el && (heroRef.current = el)}
+      >
         <div className="relative z-1 max-w-[62rem] mx-auto text-center mb-[4rem] md:mb-20 lg:mb-[6rem]">
           {/* Heading */}
           <h1 className="h1 mb-6">
@@ -27,8 +46,8 @@ const Hero = () => {
           </h1>
           {/* Text */}
           <p className="body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8">
-            Unleash the power of AI within IntelliSynth. Improve your
-            productivity with IntelliSynth, you personal AI assistant.
+            Unleash the power of AI, and Improve your productivity with
+            IntelliSynth, you personal AI assistant.
           </p>
           {/* Button */}
           <Button href="/pricing" light>
@@ -48,9 +67,35 @@ const Hero = () => {
                   width={1024}
                   height={490}
                 />
+
+                {/* Generating: Floating panel */}
+                <Generating className="absolute left-4 right-4 bottom-5 md:left-1/2 md:right-auto md:bottom-8 md:w-[31rem] md:-translate-x-1/2" />
+
+                {/* Floating Parallax Icons panel */}
+                <ScrollParallax isAbsolutelyPositioned>
+                  <ul className="hidden absolute -left-[5.5rem] bottom-[7.5rem] px-1 py-1 bg-n-9/40 backdrop-blur border border-n-1/10 rounded-2xl xl:flex">
+                    {heroIcons.map((icon, index) => (
+                      <li className="p-5" key={index}>
+                        <img src={icon} width={24} height={25} alt={icon} />
+                      </li>
+                    ))}
+                  </ul>
+                </ScrollParallax>
+
+                {/* Notification: Floating panel */}
+                <ScrollParallax isAbsolutelyPositioned>
+                  <Notification
+                    className="hidden absolute -right-[5.5rem] bottom-[11rem] w-[18rem] xl:flex"
+                    title="Code generation"
+                  />
+                </ScrollParallax>
               </div>
             </div>
+
+            {/* Add Gradient Backdrop below the robot image */}
+            <Gradient />
           </div>
+
           {/* Hero Background Image */}
           <div className="absolute -top-[54%] left-1/2 w-[234%] -translate-x-1/2 md:-top-[46%] md:w-[138%] lg:-top-[104%]">
             <img
@@ -61,10 +106,106 @@ const Hero = () => {
               alt="hero"
             />
           </div>
+
+          {/* Background Rings and Circles that move with the mouse */}
+          <BackgroundCircles />
         </div>
+
+        {/* Company Logos */}
+        <CompanyLogos className="hidden relative z-10 mt-20 lg:block" />
       </div>
+
+      {/* Lines with cross near the bottom */}
+      <BottomLine />
     </Section>
   );
 };
 
 export default Hero;
+
+// =============================================================================
+
+const Generating = ({ className }: { className?: string }) => {
+  return (
+    <div
+      className={`flex items-center h-[3.5rem] px-6 bg-n-8/80 rounded-[1.7rem] ${
+        className || ""
+      } text-base`}
+    >
+      <img className="w-5 h-5 mr-4 animate-spin" src={loading} alt="Loading" />
+      Generating...
+    </div>
+  );
+};
+
+// =============================================================================
+
+const Notification = ({
+  className,
+  title,
+}: {
+  className?: string;
+  title: string;
+}) => {
+  return (
+    <div
+      className={`${
+        className || ""
+      } flex items-center p-4 pr-6 bg-n-9/40 backdrop-blur border border-n-1/10 rounded-2xl gap-5`}
+    >
+      <img
+        src={notification1}
+        width={62}
+        height={62}
+        alt="image"
+        className="rounded-xl"
+      />
+
+      <div className="flex-1">
+        <h6 className="mb-1 font-semibold text-base">{title}</h6>
+
+        <div className="flex items-center justify-between">
+          <ul className="flex -m-0.5">
+            {notificationImages.map((item, index) => (
+              <li
+                key={index}
+                className="flex w-6 h-6 border-2 border-n-12 rounded-full overflow-hidden"
+              >
+                <img
+                  src={item}
+                  className="w-full"
+                  width={20}
+                  height={20}
+                  alt={item}
+                />
+              </li>
+            ))}
+          </ul>
+          <div className="body-2 text-n-13">1m ago</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// =============================================================================
+
+const CompanyLogos = ({ className }: { className?: string }) => {
+  return (
+    <div className={className}>
+      <h5 className="tagline mb-6 text-center text-n-1/50">
+        Saving time, one company at a time
+      </h5>
+      <ul className="flex">
+        {companyLogos.map((logo, index) => (
+          <li
+            className="flex items-center justify-center flex-1 h-[8.5rem]"
+            key={index}
+          >
+            <img src={logo} width={134} height={28} alt={logo} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
