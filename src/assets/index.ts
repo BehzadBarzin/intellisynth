@@ -1,7 +1,7 @@
-import brainwave from "./brainwave.svg";
+import intellisynth from "./intellisynth.svg";
 import check from "./check.svg";
-import brainwaveSymbol from "./brainwave-symbol.svg";
-import brainwaveWhiteSymbol from "./brainwave-symbol-white.svg";
+import intellisynthSymbol from "./intellisynth-symbol.svg";
+import intellisynthWhiteSymbol from "./intellisynth-symbol-white.svg";
 import play from "./play.svg";
 import gradient from "./gradient.png";
 import smallSphere from "./4-small.png";
@@ -76,12 +76,12 @@ import telegram from "./socials/telegram.svg";
 import twitter from "./socials/twitter.svg";
 
 export {
-  brainwave,
+  intellisynth,
   check,
   check2,
   loading1,
-  brainwaveSymbol,
-  brainwaveWhiteSymbol,
+  intellisynthSymbol,
+  intellisynthWhiteSymbol,
   play,
   gradient,
   smallSphere,
