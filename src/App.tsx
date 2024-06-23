@@ -3,6 +3,7 @@ import Collaboration from "./components/Collaboration.js";
 import Features from "./components/Features.js";
 import Header from "./components/Header";
 import Hero from "./components/Hero.js";
+import Pricing from "./components/Pricing.js";
 import Services from "./components/Services.js";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Features />
         <Collaboration />
         <Services />
+        <Pricing />
       </div>
 
       {/* Button Gradient defines the svg gradient used in buttons and must me simply included here */}
